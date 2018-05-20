@@ -19,7 +19,7 @@
           <img src="../assets/112blue.jpg">
         </div>
         <div class="left text">
-          
+
         </div>
       </div>
       <div class="row">
@@ -27,15 +27,15 @@
           <img src="../assets/8640blue.jpg">
         </div>
         <div class="right text">
-          
+
         </div>
       </div>
       <div class="row">
         <div class="right image">
-          <h1>static google image for restaraunt location</h1>
+          <googleMap></googleMap>
         </div>
         <div class="left text">
-          
+
         </div>
       </div>
     </div>
@@ -44,11 +44,13 @@
 </template>
 
 <script>
-import aHeader from '@/components/Header'
-import aFooter from '@/components/Footer'
+import aHeader from '@/components/Header';
+import aFooter from '@/components/Footer';
+import googleMap from '@/components/Map';
+
 export default {
   name: 'Main',
-  components: {aHeader,aFooter},
+  components: {aHeader,aFooter,googleMap},
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
