@@ -10,17 +10,20 @@ app.use(express.static(`${__dirname}/public`));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app.post('/stripe', function(req, res) {
-  var token = req.body.stripeToken;
-  var amount = req.body.amount;
+app.post('/stripe-charge', function(req, res) {
+  var token = req.body.token;
+  var amount = parseFloat(req.body.amount);
+
+  console.log(token);
 
   var charge = stripe.charges.create({
-    amount: parseInt(amount, 10),
+    amount: amount,
     currency: 'usd',
     description: 'Derek and Tara Honeymoon Fund',
     source: token
   }, function(err, charge) {
     if(err) {
+      console.log(err);
       return res.status(500).json(err);
     }
 
