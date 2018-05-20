@@ -7,6 +7,9 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+import vueSmoothScroll from 'vue-smooth-scroll'
+Vue.use(vueSmoothScroll);
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

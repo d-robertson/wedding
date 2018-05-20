@@ -62,6 +62,7 @@ div.arrow-img {
     left: 0;
     right: 0;
     top: 124px;
+    margin-right: 24px;
 
 }
 

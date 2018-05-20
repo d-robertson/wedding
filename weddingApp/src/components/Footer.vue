@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div id="five" class="footer">
     <router-link to="/stream"><h1>View Live Stream</h1></router-link>
   </div>
 </template>
@@ -29,7 +29,7 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #fca4e0;
 }
 
 div.footer {
