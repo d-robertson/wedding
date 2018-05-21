@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <a :href="divId" v-smooth-scroll="{ duration: 1000, offset: 0 }"><div id="mouse" class="mouse-down"></div></a> 
+    <a :href="divId" v-smooth-scroll="{ duration: 1000, offset: 0 }"><div id="mouse" class="mouse-down"></div></a>
     <aHeader></aHeader>
     <div class="container">
       <div class="row">
@@ -32,7 +32,7 @@
         </div>
         <div id="threeHalf" class="right text">
           <div class="padding">
-            <h1>No Registry but if you wish to help us honey moon we are excepting donations</h1>
+            <h1>No Registry but if you wish to help us honey moon we are accepting donations</h1>
             <form action="/charge" method="post" id="payment-form">
               <div class="form-row">
                 <label for="card-element">
@@ -99,8 +99,8 @@ export default {
           return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
       }
       // var $output = $('#output');
-      $(window).on('scroll', function () { 
-        
+      $(window).on('scroll', function () {
+
         if(window.innerWidth < 992){
 
           var mouse = document.getElementById('mouse'),
@@ -123,8 +123,8 @@ export default {
               threeHalfOffset = offset(threeHalf),
               fourHalf = document.getElementById('fourHalf'),
               fourHalfOffset = offset(fourHalf)
-              
-            if(offsetMouse.top < oneOffset.top){  
+
+            if(offsetMouse.top < oneOffset.top){
               self.divId = '#one';
             } else if(offsetMouse.top > oneOffset.top && offsetMouse.top < oneHalfOffset.top){
               self.divId = '#oneHalf';
@@ -157,7 +157,7 @@ export default {
               five = document.getElementById('five'),
               fiveOffset = offset(five)
 
-            if(offsetMouse.top < oneOffset.top){  
+            if(offsetMouse.top < oneOffset.top){
               self.divId = '#one';
             } else if(offsetMouse.top > oneOffset.top && offsetMouse.top < twoOffset.top){
               self.divId = '#two';
@@ -168,7 +168,7 @@ export default {
             } else if(offsetMouse.top > fourOffset.top && offsetMouse.top < fiveOffset.top){
               self.divId = '#five';
             }
-        } 
+        }
       });
 
       // Custom styling can be passed to options when creating an Element.
@@ -243,7 +243,7 @@ export default {
       });
 
       line.animate(.67);
-      
+
     })
   },
   watch: {
