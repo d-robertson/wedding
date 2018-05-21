@@ -10,6 +10,9 @@ Vue.config.productionTip = false
 import vueSmoothScroll from 'vue-smooth-scroll'
 Vue.use(vueSmoothScroll);
 
+import ProgressBar from "./lib/progress";
+ProgressBar();
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

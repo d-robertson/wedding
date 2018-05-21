@@ -61,7 +61,7 @@ div.arrow-img {
     position: absolute;
     left: 0;
     right: 0;
-    top: 124px;
+    top: 156px;
     margin-right: 24px;
 
 }
@@ -69,5 +69,17 @@ div.arrow-img {
 div.arrow-img img {
   width: 100%;
   max-width: 500px;
+}
+
+@media (min-width: 992px){
+  .left {
+    width: 50%;
+  }
+  .right {
+    width: 50%;
+  }
+  div.arrow-img {
+    top: 124px;
+  }
 }
 </style>

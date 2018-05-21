@@ -14,6 +14,31 @@ export default new Router({
       component: Main
     },
     {
+      path: '/one',
+      name: 'Main',
+      component: Main
+    },
+    {
+      path: '/two',
+      name: 'Main',
+      component: Main
+    },
+    {
+      path: '/three',
+      name: 'Main',
+      component: Main
+    },
+    {
+      path: '/four',
+      name: 'Main',
+      component: Main
+    },
+    {
+      path: '/five',
+      name: 'Main',
+      component: Main
+    },
+    {
     	path: '/stream',
     	name: 'Stream',
     	component: aStream
