@@ -6,7 +6,7 @@ var app = express();
 
 var PORT = process.env.PORT || 3000;
 
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/weddingApp/dist`));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
@@ -32,7 +32,7 @@ app.post('/stripe-charge', function(req, res) {
 });
 
 app.get('/*', function(req, res) {
-  res.sendFile(`${__dirname}/public/index.html`);
+  res.sendFile(`${__dirname}/weddingApp/dist/index.html`);
 });
 
 app.listen(PORT, function() { console.log(`Listening on port: ${PORT}`) });

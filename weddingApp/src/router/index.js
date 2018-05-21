@@ -7,6 +7,7 @@ import aStream from '@/components/aStream'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
