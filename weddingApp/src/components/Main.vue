@@ -92,10 +92,12 @@ export default {
       divId: '#one',
       amount: '',
       total: 0,
-      card: {}
+      card: {},
+      goal: 300000
     }
   },
   mounted (){
+    this.getCharges();
     this.$nextTick(()=>{
       var self = this;
       var numInputs = document.querySelectorAll("input[type='tel']");
@@ -231,15 +233,13 @@ export default {
 
       this.card = card;
 
-      var line = new ProgressBar.Line('#progress-bar', {
-        easing: 'easeInOut',
-        color: '#fca4e0',
-        strokeWidth: 4,
-        trailWidth: 4,
-        duration: 1400
-      });
-
-      line.animate(.67);
+        this.line = new ProgressBar.Line('#progress-bar', {
+          easing: 'easeInOut',
+          color: '#fca4e0',
+          strokeWidth: 4,
+          trailWidth: 4,
+          duration: 1400
+        });
 
     })
   },
@@ -274,13 +274,37 @@ export default {
               url: 'http://localhost:3000/stripe-charge',            
               success: function(data) {
                   console.log('success');
-                  console.log(JSON.stringify(data));
+                  // console.log('data: ',JSON.stringify(data));
+                  self.getCharges();
               },
               error: function(err){
                 console.log('error: ',err);
               }
         });
       }
+    },
+    getCharges(){
+      var self = this;
+      $.ajax({
+        type: 'GET',
+        contentType: 'application/json',
+        url: 'http://localhost:3000/get-total',            
+        success: function(data) {
+            console.log('success');
+            // console.log('data: ',JSON.stringify(data));
+        },
+        error: function(err){
+          console.log('error: ',err);
+        }
+      }).done(function(data){
+        // console.log('in done: ', data);
+
+
+        var percent = data.amount / self.goal;
+        console.log(percent);
+
+        self.line.animate(percent);
+      });
     }
   }
 }
