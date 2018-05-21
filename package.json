@@ -4,7 +4,11 @@
   "description": "Wedding site for Derek and Tara",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"npm run dev-server\" \"npm run dev-client\"",
+    "dev-server": "nodemon server.js",
+    "dev-client": "cd weddingApp && npm run dev",
+    "start": "node server.js",
+    "build-client": "cd weddingApp && npm run build"
   },
   "repository": {
     "type": "git",
@@ -18,6 +22,7 @@
   "homepage": "https://github.com/d-robertson/wedding#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "concurrently": "^3.5.1",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "stripe": "^6.0.0"
