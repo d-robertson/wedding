@@ -33,7 +33,10 @@
         <div id="threeHalf" class="right text">
           <div class="padding">
             <h1>No Registry but if you wish to help us honey moon we are accepting donations</h1>
-            <form action="/charge" method="post" id="payment-form">
+            <form v-on:submit.prevent="submitForm" method="post" id="payment-form">
+              <div class="form-row">
+                <span>$</span><input id="amount" class="amount"  type="tel" v-model="amount" placeholder="10"><span>.00</span>
+              </div>
               <div class="form-row">
                 <label for="card-element">
                   Credit or debit card
@@ -46,7 +49,7 @@
                 <div id="card-errors" role="alert"></div>
               </div>
 
-              <button>Submit Payment</button>
+              <button v-on:click.prevent="submitForm">Submit Payment</button>
             </form>
             <div class="progress-container">
               <div id="progress-bar"></div>
@@ -86,12 +89,23 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      divId: '#one'
+      divId: '#one',
+      amount: '',
+      total: 0,
+      card: {}
     }
   },
   mounted (){
     this.$nextTick(()=>{
       var self = this;
+      var numInputs = document.querySelectorAll("input[type='tel']");
+      for(var i = 0; i < numInputs.length; i++){
+          numInputs[i].addEventListener("keypress", function (evt) {
+            if (evt.which < 48 || evt.which > 57){
+                  evt.preventDefault();
+            }
+          });
+      }
       function offset(el) {
           var rect = el.getBoundingClientRect(),
           scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
@@ -171,6 +185,16 @@ export default {
         }
       });
 
+
+      function resizable (el, factor) {
+        var int = Number(factor) || 7.7;
+        function resize() {el.style.width = ((el.value.length+1) * int) + 'px'}
+        var e = 'keyup,keypress,focus,blur,change'.split(',');
+        for (var i in e) el.addEventListener(e[i],resize,false);
+        resize();
+      }
+      resizable(document.getElementById('amount'),10);
+
       // Custom styling can be passed to options when creating an Element.
       var style = {
         base: {
@@ -205,34 +229,7 @@ export default {
         }
       });
 
-      var form = document.getElementById('payment-form');
-      form.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        stripe.createToken(card).then(function(result) {
-          if (result.error) {
-            // Inform the customer that there was an error.
-            var errorElement = document.getElementById('card-errors');
-            errorElement.textContent = result.error.message;
-          } else {
-            // Send the token to your server.
-            stripeTokenHandler(result.token);
-          }
-        });
-      });
-
-      function stripeTokenHandler(token) {
-        // Insert the token ID into the form so it gets submitted to the server
-        var form = document.getElementById('payment-form');
-        var hiddenInput = document.createElement('input');
-        hiddenInput.setAttribute('type', 'hidden');
-        hiddenInput.setAttribute('name', 'stripeToken');
-        hiddenInput.setAttribute('value', token.id);
-        form.appendChild(hiddenInput);
-
-        // Submit the form
-        form.submit();
-      }
+      this.card = card;
 
       var line = new ProgressBar.Line('#progress-bar', {
         easing: 'easeInOut',
@@ -246,8 +243,45 @@ export default {
 
     })
   },
-  watch: {
+  methods: {
+    submitForm(e){
+      var self = this;
+      e.preventDefault();
+      var form = document.getElementById('payment-form');
 
+      stripe.createToken(self.card).then(function(result) {
+        if (result.error) {
+          // Inform the customer that there was an error.
+          var errorElement = document.getElementById('card-errors');
+          errorElement.textContent = result.error.message;
+        } else {
+          // Send the token to your server.
+          stripeTokenHandler(result.token);
+        }
+      });
+        
+
+      function stripeTokenHandler(token) {
+        var data = {};
+        data.stripeToken = token;
+        data.amount = self.amount * 100;
+
+        console.log(data);
+        $.ajax({
+          type: 'POST',
+          data: JSON.stringify(data),
+              contentType: 'application/json',
+              url: 'http://localhost:3000/stripe-charge',            
+              success: function(data) {
+                  console.log('success');
+                  console.log(JSON.stringify(data));
+              },
+              error: function(err){
+                console.log('error: ',err);
+              }
+        });
+      }
+    }
   }
 }
 </script>
@@ -388,7 +422,26 @@ form label {
 .progress-container {
   position: absolute; bottom: 24px;
   width: calc(100% - 24px);
+}
 
+.amount {
+  background: transparent;
+  font-size: 22px;
+  font-family: 'Love Ya Like A Sister', cursive;
+  border: none;
+  padding: 12px 0px 12px 12px;
+  min-width: 30px!important;
+  max-width: 99.99%!important;
+  -webkit-transition: width 0.25s;
+  transition: width 0.25s;
+}
+
+span {
+  font-size: 22px;
+}
+
+input:focus {
+  outline: none;
 }
 
 @media (min-width: 992px){

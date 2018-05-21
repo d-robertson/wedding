@@ -1,6 +1,6 @@
 require('dotenv').config();
 var express = require('express');
-var stripe = require('stripe')(process.env.STRIPE_SECRET || 'sk_test_BQokikJOvBiI2HlWgH4olfQ2');
+var stripe = require('stripe')(process.env.STRIPE_SECRET || 'sk_test_PlzL4RMbQugwTqbQccUZVxy4');
 var bodyParser = require('body-parser');
 var app = express();
 
@@ -10,9 +10,12 @@ app.use(express.static(`${__dirname}/weddingApp/dist`));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+
+
 app.post('/stripe-charge', function(req, res) {
-  var token = req.body.token;
-  var amount = parseFloat(req.body.amount);
+  console.log(req.body);
+  var token = req.body.stripeToken;
+  var amount = req.body.amount;
 
   console.log(token);
 

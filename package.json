@@ -26,5 +26,8 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "stripe": "^6.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.4"
   }
 }
