@@ -34,6 +34,26 @@ export default new Router({
       component: Main
     },
     {
+      path: '/oneHalf',
+      name: 'Main',
+      component: Main
+    },
+    {
+      path: '/twoHalf',
+      name: 'Main',
+      component: Main
+    },
+    {
+      path: '/threeHalf',
+      name: 'Main',
+      component: Main
+    },
+    {
+      path: '/fourHalf',
+      name: 'Main',
+      component: Main
+    },
+    {
       path: '/five',
       name: 'Main',
       component: Main

@@ -23,4 +23,8 @@ export default {
   /*margin-top: 60px;*/
   font-family: 'Love Ya Like A Sister', cursive;
 }
+
+button {
+  font-family: 'Love Ya Like A Sister', cursive;
+}
 </style>
