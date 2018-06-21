@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use(function(req, res) {
+app.use(function(req, res, next) {
   if(env === 'production') {
     if (req.headers['x-forwarded-proto'] !== 'https') {
       return res.redirect(['https://', req.get('Host'), req.url].join(''));
