@@ -84,7 +84,7 @@
                 <h3>Sean: Groomsman<br> (Brother)</h3>
               </div>
               <div class="peep-right">
-                <h3>Most Admired Quality: <br><br>" "</h3>
+                <h3>Most Admired Quality: <br><br>"The quaulity I most admire is his grit. No matter what happens, Derek always finds a way to keep going forward and work hard for those he cares about"</h3>
               </div>
             </div>
           </div>
@@ -128,14 +128,14 @@
               </form>
             </div>
             <div v-else>
-              <h1 style="margin-top: 50%;">Thank you so much for your donation to the Tara & Derek Honey Moon Fund :)</h1>
+              <h1 style="margin-top: 50%;">Thank you so much for your donation to the Tara &amp; Derek Honey Moon Fund :)</h1>
             </div>
             <div class="progress-container">
               <div id="progress-bar"></div>
             </div>
             <div class="current-goal">
               <span style="float:left;">Current ${{ currentTotal }}.00</span>
-            
+
               <span style="float:right;">Goal ${{ goal / 100 }}.00</span>
             </div>
           </div>
@@ -198,11 +198,11 @@ export default {
   },
   mounted (){
     this.getCharges();
-    
+
     this.$nextTick(()=>{
       var self = this;
       setTimeout(function(){ self.setHeight(); },300);
-     
+
       var numInputs = document.querySelectorAll("input[type='tel']");
       for(var i = 0; i < numInputs.length; i++){
           numInputs[i].addEventListener("keypress", function (evt) {
@@ -364,7 +364,7 @@ export default {
           stripeTokenHandler(result.token);
         }
       });
-        
+
 
       function stripeTokenHandler(token) {
         var data = {};
@@ -376,8 +376,8 @@ export default {
           type: 'POST',
           data: JSON.stringify(data),
               contentType: 'application/json',
-              // url: 'http://localhost:3000/stripe-charge', 
-              url: '/stripe-charge',            
+              // url: 'http://localhost:3000/stripe-charge',
+              url: '/stripe-charge',
               success: function(data) {
                   console.log('success');
                   // console.log('data: ',JSON.stringify(data));
@@ -386,9 +386,9 @@ export default {
                     self.sending = false;
                     self.reset();
                     self.thankYou = true;
-                    
+
                   }, 1000);
-                  
+
                   self.getCharges();
               },
               error: function(err){
@@ -408,8 +408,8 @@ export default {
       $.ajax({
         type: 'GET',
         contentType: 'application/json',
-        // url: 'http://localhost:3000/get-total', 
-        url: '/get-total',            
+        // url: 'http://localhost:3000/get-total',
+        url: '/get-total',
         success: function(data) {
             console.log('success');
             // console.log('data: ',JSON.stringify(data));
@@ -446,7 +446,7 @@ export default {
 
 
         for(var i = 0; i < images.length; i++){
-          
+
           if(window.innerWidth > 420){
 
             $(images[i]).height(images[i].parentElement.parentElement.clientHeight / 3);
@@ -618,7 +618,7 @@ div#one.text {
 .clearfix {
     overflow: auto;
 }
-  
+
 
 #img1{background-image:url('../assets/8586blue.jpg'); background-position: center; background-size: cover;}
 @media(max-width: 420px){
@@ -655,7 +655,7 @@ div#one.text {
 }
 
 #sean {
-  background-image: url('../assets/44blue.jpg');
+  background-image: url('../assets/sean.jpg');
 }
 
 .peep-left {
@@ -726,7 +726,7 @@ form label {
 .progress-container {
   position: absolute; bottom: 130px;
   width: calc(100% - 24px);
-  
+
 }
 @media(max-width: 500px){
   #threeHalf h1 {font-size: 18px;}
