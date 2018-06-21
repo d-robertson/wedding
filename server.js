@@ -16,7 +16,10 @@ app.use(cors());
 app.use(function(req, res, next) {
   if(env === 'production') {
     if (req.headers['x-forwarded-proto'] !== 'https') {
-      return res.redirect(['https://', req.get('Host'), req.url].join(''));
+      console.log('NOT HTTPS!!!!!');
+      var secureUrl = 'https://' + req.headers['host'] + req.url;
+      res.writeHead(301, { "Location":  secureUrl });
+      return res.end();
     }
     return next();
   }
