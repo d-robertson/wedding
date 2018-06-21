@@ -198,9 +198,11 @@ export default {
   },
   mounted (){
     this.getCharges();
-    this.setHeight();
+    
     this.$nextTick(()=>{
       var self = this;
+      setTimeout(function(){ self.setHeight(); },300);
+     
       var numInputs = document.querySelectorAll("input[type='tel']");
       for(var i = 0; i < numInputs.length; i++){
           numInputs[i].addEventListener("keypress", function (evt) {
@@ -386,13 +388,7 @@ export default {
                     self.thankYou = true;
                     
                   }, 1000);
-                  // setTimeout(function(){
-                  //     self.thankYou = false;
-                  // },3000);
-                  // self.$nextTick(function(){
-                  //   self.resizable(document.getElementById('amount'),10);
-                  // });
-                  // self.thankYou = true;
+                  
                   self.getCharges();
               },
               error: function(err){
