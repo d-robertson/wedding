@@ -2,16 +2,16 @@
   <div class="main">
     <a :href="divId" v-smooth-scroll="{ duration: 1000, offset: 0 }"><div id="mouse" class="mouse-down"></div></a>
     <aHeader></aHeader>
-    <div class="container">
-      <div class="row">
-        <div id="one" class="left image">
-          <img src="../assets/8586blue.jpg">
-          <img src="../assets/44blue.jpg">
+    <div class="container clearfix">
+      <div class="row clearfix">
+        <div id="one" class="left image clearfix">
+          <div id="img1" class="images-2"></div>
+          <div id="img2" class="images-2"></div>
         </div>
         <!-- <div id="one-other-pic" class="left image">
-          <img src="../assets/44blue.jpg">
+          <div style="background-image:url('../assets/44blue.jpg')"></div>
         </div> -->
-        <div id="oneHalf" class="right text">
+        <div id="oneHalf" class="right text clearfix">
           <h1>Our Story From Tara:</h1>
           <h3>Derek and I have a unique story. The thing that has been the biggest blessing to me is how we have managed to be the partner that the other  needed in the various stages of life we have found each other. We first met our Freshman year of high school. Derek and I shared a few classes together and some mutual friends. One of my first interactions with him that I can remember is him trying to teach me how to skateboard at a friend’s birthday party.  I don’t think I humored him much with the skateboard, I was far too afraid of not being a natural on my first try. As a young adult I would avoid venerability at almost any cost, so I kept my barriers up during most of our interactions. Which is probably why it took him until April to ask me out. We ended up spending a lot of time together playing basketball in PE and then Derek eventually started walking me up to the buses at the end of the school day. We dated off and on throughout high school and into our first year of college.
           </h3>
@@ -22,15 +22,15 @@
           We are both so excited for our wedding, but so much more excited for continuing our journey together in marriage! We dream about taking time to travel, to build a home together, and to make a family someday.</h3>
         </div>
       </div>
-      <div class="row">
-        <div id="two" class="right image">
+      <div class="row clearfix">
+        <div id="two" class="right image clearfix">
           <h1 id="tank-title">Tank Approved :)</h1>
-          <img src="../assets/112blue.jpg">
-          <img src="../assets/dtblue.jpg">
-          <img src="../assets/happy-tank-blue.jpg" style="height: calc(100vh - 123px);">
+          <div class="images-3"  id="img3"></div>
+          <div class="images-3"  id="img4"></div>
+          <div  class="images-3" id="img5"></div>
 
         </div>
-        <div id="twoHalf" class="left text">
+        <div id="twoHalf" class="left text clearfix">
           <div class="padding">
             <h1>Wedding Party</h1>
             <div class="peep">
@@ -90,11 +90,11 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div id="three" class="left image">
-          <img src="../assets/8640blue.jpg">
+      <div class="row clearfix">
+        <div id="three" class="left image clearfix">
+          <div id="img6"></div>
         </div>
-        <div id="threeHalf" class="right text">
+        <div id="threeHalf" class="right text clearfix">
           <div class="padding">
             <div v-if="!thankYou">
               <h1>No Registry but if you wish to help us honey moon we are accepting donations</h1>
@@ -141,11 +141,11 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div id="four" class="right image map">
+      <div class="row clearfix">
+        <div id="four" class="right image map clearfix">
           <googleMap></googleMap>
         </div>
-        <div id="fourHalf" class="left text">
+        <div id="fourHalf" class="left text clearfix">
           <div class="padding">
             <h1>This is where we will be partying</h1>
             <h2>41 Lakeshore Dr, Sagle, ID 83860</h2>
@@ -197,6 +197,7 @@ export default {
   },
   mounted (){
     this.getCharges();
+    this.setHeight();
     this.$nextTick(()=>{
       var self = this;
       var numInputs = document.querySelectorAll("input[type='tel']");
@@ -213,6 +214,11 @@ export default {
           scrollTop = window.pageYOffset || document.documentElement.scrollTop;
           return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
       }
+
+      $(window).on('resize', function(){
+        // self.setHeight();
+      });
+
       // var $output = $('#output');
       $(window).on('scroll', function () {
 
@@ -286,8 +292,6 @@ export default {
         }
       });
 
-
-      
       self.resizable(document.getElementById('amount'),10);
 
       // Custom styling can be passed to options when creating an Element.
@@ -434,6 +438,24 @@ export default {
         var e = 'keyup,keypress,focus,blur,change'.split(',');
         for (var i in e) el.addEventListener(e[i],resize,false);
         resize();
+    },
+    setHeight(){
+      this.$nextTick(()=>{
+
+        var images = $('.images-3');
+        var otherImages = $('.images-2');
+
+        for(var i = 0; i < images.length; i++){
+          
+          $(images[i]).height(images[i].parentElement.parentElement.clientHeight / 3);
+          
+        }
+        for(var j = 0; j < otherImages.length; j++){
+
+          $(otherImages[j]).height(otherImages[j].parentElement.parentElement.clientHeight / 2);
+
+        }
+      })
     }
   }
 }
@@ -503,7 +525,7 @@ div.row {
   font-size: 40px;
 }
 
-div#one.left img{
+div#one.left div{
   height: 518px;
 }
 
@@ -575,6 +597,19 @@ div#one.text {
   margin: auto;
 }
 
+.clearfix {
+    overflow: auto;
+}
+  
+
+#img1{background-image:url('../assets/8586blue.jpg'); background-position: center; background-size: cover;}
+#img2{background-image:url('../assets/44blue.jpg'); background-position: center; background-size: cover;}
+#img3{background-image:url('../assets/112blue.jpg'); background-position: center; background-size: cover;}
+#img4{background-image:url('../assets/dtblue.jpg'); background-position: center; background-size: cover;}
+#img5{background-image:url('../assets/happy-tank-blue.jpg');background-position: center; background-size: cover;}
+#img6{background-image:url('../assets/8640blue.jpg'); background-position: center; background-size: cover; height: 100vh;}
+
+
 #courtney {
   background-image: url('../assets/courtney.png');
 }
@@ -593,7 +628,9 @@ div#one.text {
 }
 
 #jayce {
-  background-image: url('../assets/44blue.jpg');
+  background-image: url('../assets/metelo.jpg');
+  background-position: center;
+  background-size: cover;
 }
 
 #sean {
