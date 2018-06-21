@@ -58,7 +58,7 @@ div.header .scrollLink{
   top: 0;
   right: 0;
   width: 100%;
-  /*max-width: 320px;*/
+  max-width: 100%;
   height: 40px;
   z-index: 1;
   color: #fca4e0;
