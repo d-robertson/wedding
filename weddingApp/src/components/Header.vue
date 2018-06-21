@@ -1,5 +1,8 @@
 <template>
   <div class="header">
+    <div class="scrollLink">
+      <router-link to="/stream"><h1>View Live Stream</h1></router-link>
+    </div>
     <div class="titles">
       <h2>Tara & Derek's</h2>
       <h1>Happy Wedding Day</h1>
@@ -36,7 +39,7 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #fca4e0;
 }
 
 div.header {
@@ -49,6 +52,26 @@ div.header {
   top: 0;
   left: 0;
 }
+
+div.header .scrollLink{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 320px;
+  height: 40px;
+  z-index: 1;
+  color: #fca4e0;
+  background-color: #121327;
+}
+
+div.header .scrollLink a h1 {
+  color: #fca4e0;
+  font-size: 22px;
+  margin: 5px;
+}
+
+
 
 div.titles {
   margin-top: 200px;
