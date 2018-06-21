@@ -16,6 +16,7 @@ app.use(function(req, res, next) {
   console.log('USING MIDDLEWARE!!!!');
   if(process.env.NODE_ENV === 'production') {
     console.log('NODE IS PRODUCTION!!!!');
+    console.log('X-FORWARDED-PROTO!!!', req.headers['x-forwarded-proto']);
     if (req.headers['x-forwarded-proto'] !== 'https') {
       console.log('NOT HTTPS!!!!');
       var secureUrl = 'https://' + req.headers['host'] + req.url;
