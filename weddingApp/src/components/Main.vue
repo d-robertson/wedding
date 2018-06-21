@@ -201,7 +201,7 @@ export default {
     
     this.$nextTick(()=>{
       var self = this;
-      setTimeout(function(){ self.setHeight(); },200);
+      setTimeout(function(){ self.setHeight(); },300);
      
       var numInputs = document.querySelectorAll("input[type='tel']");
       for(var i = 0; i < numInputs.length; i++){
