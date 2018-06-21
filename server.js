@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
       console.log('NOT HTTPS!!!!');
       var secureUrl = 'https://' + req.headers['host'] + req.url;
       res.writeHead(301, { "Location":  secureUrl });
-      return res.end();
+      return res.redirect(secureUrl);
     }
     return next();
   }
