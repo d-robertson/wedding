@@ -4,6 +4,7 @@ var stripe = require('stripe')(process.env.STRIPE_SECRET || 'sk_test_PlzL4RMbQug
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var app = express();
+var env = process.env.NODE_ENV || 'development';
 
 var PORT = process.env.PORT || 3000;
 
@@ -12,7 +13,14 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 
-
+app.use(function(req, res) {
+  if(env === 'production') {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      return res.redirect(['https://', req.get('Host'), req.url].join(''));
+    }
+    return next();
+  }
+});
 
 app.post('/stripe-charge', function(req, res) {
   console.log(req.body);
@@ -68,7 +76,7 @@ function getCharges(res, startingAfter, previousCharges){
       }
     );
 
-    
+
   } else {
     var charges = stripe.charges.list(
       { limit: 100 },
@@ -89,7 +97,7 @@ function getCharges(res, startingAfter, previousCharges){
         }
       }
     );
-    
+
   }
 }
 
@@ -104,11 +112,11 @@ app.get('/get-total', function(req, res){
   //     console.log(charges);
   //     // asynchronously called
   //   }
-  // );  
+  // );
 
   // console.log('all: ',allChargesAmount);
   // res.send({ amount: allChargesAmount });
-  
+
 });
 
 app.get('/*', function(req, res) {
