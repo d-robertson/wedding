@@ -4,7 +4,6 @@ var stripe = require('stripe')(process.env.STRIPE_SECRET || 'sk_test_PlzL4RMbQug
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var app = express();
-var env = process.env.NODE_ENV || 'development';
 
 var PORT = process.env.PORT || 3000;
 
@@ -14,7 +13,9 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use(function(req, res, next) {
-  if(env === 'production') {
+  console.log('USING MIDDLEWARE!!!!');
+  if(process.env.NODE_ENV === 'production') {
+    console.log('NODE IS PRODUCTION!!!!');
     if (req.headers['x-forwarded-proto'] !== 'https') {
       console.log('NOT HTTPS!!!!');
       var secureUrl = 'https://' + req.headers['host'] + req.url;
