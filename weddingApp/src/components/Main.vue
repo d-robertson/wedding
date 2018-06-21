@@ -374,7 +374,7 @@ export default {
           type: 'POST',
           data: JSON.stringify(data),
               contentType: 'application/json',
-              url: 'http://localhost:3000/stripe-charge',            
+              url: '/stripe-charge',            
               success: function(data) {
                   console.log('success');
                   // console.log('data: ',JSON.stringify(data));
