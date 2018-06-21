@@ -374,7 +374,8 @@ export default {
           type: 'POST',
           data: JSON.stringify(data),
               contentType: 'application/json',
-              url: 'http://localhost:3000/stripe-charge',            
+              // url: 'http://localhost:3000/stripe-charge', 
+              url: '/stripe-charge',            
               success: function(data) {
                   console.log('success');
                   // console.log('data: ',JSON.stringify(data));
@@ -411,7 +412,8 @@ export default {
       $.ajax({
         type: 'GET',
         contentType: 'application/json',
-        url: 'http://localhost:3000/get-total',            
+        // url: 'http://localhost:3000/get-total', 
+        url: '/get-total',            
         success: function(data) {
             console.log('success');
             // console.log('data: ',JSON.stringify(data));
