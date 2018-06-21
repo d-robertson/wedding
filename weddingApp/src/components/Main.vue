@@ -6,7 +6,7 @@
       <div class="row clearfix">
         <div id="one" class="left image clearfix">
           <div id="img1" class="images-2"></div>
-          <div id="img2" class="images-2"></div>
+          <div id="img2" class="images-2" v-if="window.innerWidth > 992"></div>
         </div>
         <!-- <div id="one-other-pic" class="left image">
           <div style="background-image:url('../assets/44blue.jpg')"></div>
@@ -26,8 +26,8 @@
         <div id="two" class="right image clearfix">
           <h1 id="tank-title">Tank Approved :)</h1>
           <div class="images-3"  id="img3"></div>
-          <div class="images-3"  id="img4"></div>
-          <div  class="images-3" id="img5"></div>
+          <div class="images-3"  id="img4" v-if="window.innerWidth > 992"></div>
+          <div  class="images-3" id="img5" v-if="window.innerWidth > 992"></div>
 
         </div>
         <div id="twoHalf" class="left text clearfix">
@@ -183,7 +183,8 @@ export default {
       loading: false,
       thankYou: false,
       thankYouAmount: '',
-      error: false
+      error: false,
+      window: window
     }
   },
   watch: {
@@ -445,14 +446,33 @@ export default {
         var images = $('.images-3');
         var otherImages = $('.images-2');
 
+
         for(var i = 0; i < images.length; i++){
           
-          $(images[i]).height(images[i].parentElement.parentElement.clientHeight / 3);
-          
+          if(window.innerWidth > 420){
+
+            $(images[i]).height(images[i].parentElement.parentElement.clientHeight / 3);
+
+          } else {
+            console.log(window.innerHeight);
+            $(images[i]).height(window.innerHeight);
+
+          }
+
         }
+
         for(var j = 0; j < otherImages.length; j++){
 
-          $(otherImages[j]).height(otherImages[j].parentElement.parentElement.clientHeight / 2);
+          if(window.innerWidth > 420){
+
+            $(otherImages[j]).height(otherImages[j].parentElement.parentElement.clientHeight / 2);
+
+          } else {
+
+            // console.log(window.innerHeight);
+            $(otherImages[i]).height(window.innerHeight);
+
+          }
 
         }
       })
@@ -526,7 +546,7 @@ div.row {
 }
 
 div#one.left div{
-  height: 518px;
+  /*height: 518px;*/
 }
 
 .left {
@@ -603,6 +623,9 @@ div#one.text {
   
 
 #img1{background-image:url('../assets/8586blue.jpg'); background-position: center; background-size: cover;}
+@media(max-width: 420px){
+  #img1{background-image:url('../assets/8586blue.jpg'); background-position: center; background-size: cover; height: 100vh}
+}
 #img2{background-image:url('../assets/44blue.jpg'); background-position: center; background-size: cover;}
 #img3{background-image:url('../assets/112blue.jpg'); background-position: center; background-size: cover;}
 #img4{background-image:url('../assets/dtblue.jpg'); background-position: center; background-size: cover;}
@@ -659,6 +682,15 @@ div#one.text {
 
 }
 
+@media(max-width: 992px){
+  .peep-left {
+    width: 100%;
+  }
+  .peep-right {
+    width: 100%;
+  }
+}
+
 .padding {
   padding: 12px;
 }
@@ -698,6 +730,11 @@ form label {
   width: calc(100% - 24px);
   
 }
+@media(max-width: 500px){
+  #threeHalf h1 {font-size: 18px;}
+  #threeHalf span {font-size: 18px;}
+}
+
 
 /*.progress-container .progress-bar svg {
   border-radius: 5px;
