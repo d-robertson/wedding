@@ -164,7 +164,7 @@ import aHeader from '@/components/Header';
 import aFooter from '@/components/Footer';
 import googleMap from '@/components/Map';
 
-var stripe = Stripe('pk_test_QSiBmoY5dCOzEwDO9aQFMS5v');
+var stripe = Stripe('pk_live_E27rVJGC7iYue4Y1jDRW2Q4G');
 var elements = stripe.elements();
 
 export default {
