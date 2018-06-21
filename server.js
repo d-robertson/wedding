@@ -19,9 +19,7 @@ app.use(function(req, res, next) {
     console.log('X-FORWARDED-PROTO!!!', req.headers['x-forwarded-proto']);
     if (req.headers['x-forwarded-proto'] !== 'https') {
       console.log('NOT HTTPS!!!!');
-      var secureUrl = 'https://' + req.headers['host'] + req.url;
-      res.writeHead(301, { "Location":  secureUrl });
-      return res.redirect(secureUrl);
+      return res.status(301).redirect('https://' + req.headers['host'] + req.url);
     }
     return next();
   }
